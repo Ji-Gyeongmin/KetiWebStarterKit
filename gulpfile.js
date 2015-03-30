@@ -164,6 +164,9 @@ gulp.task('html', function () {
 // Clean Output Directory
 gulp.task('clean', del.bind(null, ['.tmp', 'dist/*', '!dist/.git', 'app/libs', 'node_modules'], {dot: true}));
 
+// Clean Output Directory
+gulp.task('clean:build', del.bind(null, ['.tmp', 'dist/*', '!dist/.git', 'app/libs'], {dot: true}));
+
 // Watch Files For Changes & Reload
 gulp.task('serve', ['styles', 'coffee'], function () {
   browserSync({
@@ -198,7 +201,7 @@ gulp.task('serve:dist', ['default'], function () {
 });
 
 // Build Production Files, the Default Task
-gulp.task('default', ['clean'], function (cb) {
+gulp.task('default', ['clean:build'], function (cb) {
   runSequence('styles', 'coffee', ['jshint', 'html', 'images', 'fonts', 'copy'], cb);
 });
 
